@@ -7,9 +7,17 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class PattenMatchingExampleTest {
 
+    private PattenMatchingExample pattenMatchingExample = new PattenMatchingExample();
+
     @Test
     void guessWhat() {
-        assertThat(new PattenMatchingExample().guessSomething(1)).isEqualTo("It's a number.s");
+        assertThat(pattenMatchingExample.guessSomething(1)).isEqualTo("It's a number.");
     }
+
+    @Test
+    void lowMediumHigh() {
+        assertThat(pattenMatchingExample.isInt(1)).isTrue();
+    }
+
 
 }
