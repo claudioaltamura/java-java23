@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 */
 
-public class Example {
+public class ModuleImportDeclarationExample {
     public static Map<Character, List<String>> groupByFirstLetter(String... values) {
         return Stream.of(values).collect(
                 Collectors.groupingBy(s -> Character.toUpperCase(s.charAt(0))));
