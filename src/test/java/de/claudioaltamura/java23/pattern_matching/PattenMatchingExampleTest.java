@@ -15,9 +15,16 @@ class PattenMatchingExampleTest {
     }
 
     @Test
-    void lowMediumHigh() {
+    void isInt() {
         assertThat(pattenMatchingExample.isInt(1)).isTrue();
     }
 
+    @Test
+    void lowMediumHigh() {
+        assertThat(pattenMatchingExample.calculateSeverity(-1)).isEqualTo(Severity.UNKNOWN);
+        assertThat(pattenMatchingExample.calculateSeverity(1)).isEqualTo(Severity.LOW);
+        assertThat(pattenMatchingExample.calculateSeverity(4)).isEqualTo(Severity.MEDIUM);
+        assertThat(pattenMatchingExample.calculateSeverity(7)).isEqualTo(Severity.HIGH);
+    }
 
 }
