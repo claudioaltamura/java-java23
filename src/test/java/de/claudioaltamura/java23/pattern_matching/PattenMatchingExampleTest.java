@@ -3,11 +3,10 @@ package de.claudioaltamura.java23.pattern_matching;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 class PattenMatchingExampleTest {
 
-    private PattenMatchingExample pattenMatchingExample = new PattenMatchingExample();
+    private final PattenMatchingExample pattenMatchingExample = new PattenMatchingExample();
 
     @Test
     void guessWhat() {

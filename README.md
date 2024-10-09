@@ -5,3 +5,4 @@ Java 23 feature examples
   * maven-javadoc-plugin version 3.10.1 not working
 * Module Import Declaration
 * Primitive Types in Patterns, instanceof, and switch (Preview) – JEP 455
+* Stream Gatherer
