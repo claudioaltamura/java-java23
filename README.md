@@ -6,3 +6,4 @@ Java 23 feature examples
 * Module Import Declaration
 * Primitive Types in Patterns, instanceof, and switch (Preview)
 * Stream Gatherer (Preview)
+* Flexible Constructor Bodies

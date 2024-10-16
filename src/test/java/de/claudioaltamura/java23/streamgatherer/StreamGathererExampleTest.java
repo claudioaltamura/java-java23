@@ -17,4 +17,14 @@ class StreamGathererExampleTest {
 
         assertThat(result).containsAll(List.of(4,2,1,4));
     }
+
+    @Test
+    void testeGroupOfThree() {
+        final var streamGathererExample = new StreamGathererExample();
+
+        final List<List<String>> result = streamGathererExample.groupsOfThree(List.of("Hello", "beautiful", "world", "You", "are", "nice"));
+
+        assertThat(result).hasSize(2);
+        assertThat(result.getFirst()).contains("Hello", "beautiful", "world");
+    }
 }
