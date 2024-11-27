@@ -44,4 +44,9 @@ class StreamGathererExampleTest {
         assertThat(result.get(1)).contains("world", "You");
         assertThat(result.getLast()).contains("are", "nice");
     }
+
+    @Test
+    void getLongest() {
+        assertThat(streamGathererExample.getLongest(List.of("Hello", "beautiful", "world")).get()).isEqualTo("beautiful");
+    }
 }

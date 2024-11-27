@@ -1,8 +1,11 @@
 package de.claudioaltamura.java23.streamgatherer;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Optional;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Function;
 import java.util.stream.Gatherer;
 import java.util.stream.Gatherers;
@@ -85,4 +88,51 @@ public class StreamGathererExample {
                 .gather(windowing(groupSize))
                 .toList();
     }
+
+    public <T> Gatherer<T, AtomicReference<T>, T> maximumBy(Comparator<T> comparator) {
+        return Gatherer.of(
+                // Initializer
+                AtomicReference::new,
+
+                // Integrator
+                Gatherer.Integrator.ofGreedy(
+                        (state, element, downstream) -> {
+                            T bestElement = state.get();
+                            if (bestElement == null || comparator.compare(element, bestElement) > 0) {
+                                state.set(element);
+                            }
+                            return true;
+                        }),
+
+                // Combiner
+                (state1, state2) -> {
+                    T bestElement1 = state1.get();
+                    T bestElement2 = state2.get();
+
+                    if (bestElement1 == null) {
+                        return state2;
+                    } else if (bestElement2 == null) {
+                        return state1;
+                    } else if (comparator.compare(bestElement1, bestElement2) > 0) {
+                        return state1;
+                    } else {
+                        return state2;
+                    }
+                },
+
+                // Finisher
+                (state, downstream) -> {
+                    T bestElement = state.get();
+                    if (bestElement != null) {
+                        downstream.push(bestElement);
+                    }
+                });
+    }
+
+    public Optional<String> getLongest(List<String> words) {
+        return words.parallelStream()
+                .gather(maximumBy(Comparator.comparing(String::length)))
+                .findFirst();
+    }
+
 }
