@@ -13,14 +13,18 @@ class StreamExamplesTest {
     void countLongWords() {
         var minLen = 4;
         var words = List.of("Java", "is", "a", "programming", "language", "and", "platform");
-        new StreamExamples().countLongWords(words, minLen);
-        assertThat(new StreamExamples().countLongWords(words, minLen)).isEqualTo(4);
+
+        var streamExamples = new StreamExamples();
+
+        assertThat(streamExamples.countLongWords(words, minLen)).isEqualTo(4);
     }
 
     @Test
     void groupByLength() {
         var words = List.of("Java", "is", "a", "programming", "language", "and", "platform");
+
         var result = new StreamExamples().groupByLength(words);
+
         assertThat(result.size()).isEqualTo(6);
     }
 }
