@@ -26,5 +26,6 @@ class StreamGathererExampleTest {
 
         assertThat(result).hasSize(2);
         assertThat(result.getFirst()).contains("Hello", "beautiful", "world");
+        assertThat(result.getLast()).contains("You", "are", "nice");
     }
 }
