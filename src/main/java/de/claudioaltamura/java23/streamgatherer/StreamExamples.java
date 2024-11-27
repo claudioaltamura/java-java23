@@ -6,8 +6,7 @@ import java.util.stream.Collectors;
 
 /**
  * Stream examples.
- *
- * see https://www.happycoders.eu/de/java/stream-gatherers/
+ * see <a href="https://www.happycoders.eu/de/java/stream-gatherers/">stream-gatherers</a>
  */
 public class StreamExamples {
 
