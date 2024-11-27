@@ -34,4 +34,14 @@ class StreamGathererExampleTest {
         assertThat(result).contains("Hello", "beautiful", "world");
     }
 
+    @Test
+    void groupWords() {
+        var groupSize = 2;
+        final List<List<String>> result = streamGathererExample.groupWords(List.of("Hello", "beautiful", "world", "You", "are", "nice"), groupSize);
+
+        assertThat(result).hasSize(3);
+        assertThat(result.getFirst()).contains("Hello", "beautiful");
+        assertThat(result.get(1)).contains("world", "You");
+        assertThat(result.getLast()).contains("are", "nice");
+    }
 }

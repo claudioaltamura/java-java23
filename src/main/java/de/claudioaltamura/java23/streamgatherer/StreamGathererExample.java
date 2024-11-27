@@ -1,6 +1,7 @@
 package de.claudioaltamura.java23.streamgatherer;
 
 import java.util.List;
+import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Function;
 import java.util.stream.Gatherer;
@@ -54,4 +55,34 @@ public class StreamGathererExample {
                 .toList();
     }
 
+    public <T> Gatherer<T, List<T>, List<T>> windowing(int windowSize) {
+        return Gatherer.ofSequential(
+                // Initializer
+                ArrayList::new,
+
+                // Gatherer
+                (state, element, downstream) -> {
+                    state.add(element);
+                    if (state.size() == windowSize) {
+                        boolean result = downstream.push(List.copyOf(state));
+                        state.clear();
+                        return result;
+                    } else {
+                        return true;
+                    }
+                },
+
+                // Finisher
+                (state, downstream) -> {
+                    if (!state.isEmpty()) {
+                    downstream.push(List.copyOf(state));
+                }
+        });
+    }
+
+    public List<List<String>> groupWords(List<String> words, int groupSize) {
+        return words.stream()
+                .gather(windowing(groupSize))
+                .toList();
+    }
 }
