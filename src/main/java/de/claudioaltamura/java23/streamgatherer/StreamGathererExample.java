@@ -1,10 +1,15 @@
 package de.claudioaltamura.java23.streamgatherer;
 
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Function;
 import java.util.stream.Gatherer;
 import java.util.stream.Gatherers;
 
+/**
+ * Stream gatherer example.
+ * see <a href="https://www.happycoders.eu/de/java/stream-gatherers/">stream-gatherers</a>
+ */
 public class StreamGathererExample {
 
     public <T, R> Gatherer<T, Void, R> mapping(Function<T, R> mapper) {
@@ -25,6 +30,27 @@ public class StreamGathererExample {
     public List<List<String>> groupsOfThree(List<String> words) {
         return words.stream()
                 .gather(Gatherers.windowFixed(3))
+                .toList();
+    }
+
+    public <T> Gatherer<T, AtomicInteger, T> limiting(int maxSize) {
+        return Gatherer.ofSequential(
+                // Initializer
+                AtomicInteger::new,
+
+                // Integrator
+                (state, element, downstream) -> {
+                    if (state.getAndIncrement() < maxSize) {
+                        return downstream.push(element);
+                    } else {
+                        return false;
+                    }
+                });
+    }
+
+    public List<String> firstThreeWords(List<String> words) {
+        return words.stream()
+                .gather(limiting(3))
                 .toList();
     }
 
