@@ -10,7 +10,7 @@ class PattenMatchingExampleTest {
 
     @Test
     void guessWhat() {
-        assertThat(pattenMatchingExample.guessSomething(1)).isEqualTo("It's a number.");
+        assertThat(pattenMatchingExample.guessSomething(1)).isEqualTo("1 it's a number.");
     }
 
     @Test
