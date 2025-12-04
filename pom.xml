@@ -22,21 +22,21 @@
       <dependency>
         <groupId>org.junit</groupId>
         <artifactId>junit-bom</artifactId>
-        <version>5.11.0</version>
+        <version>5.14.1</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
       <dependency>
         <groupId>org.mockito</groupId>
         <artifactId>mockito-bom</artifactId>
-        <version>5.12.0</version>
+        <version>5.20.0</version>
         <scope>import</scope>
         <type>pom</type>
       </dependency>
       <dependency>
         <groupId>org.assertj</groupId>
         <artifactId>assertj-bom</artifactId>
-        <version>3.26.3</version>
+        <version>3.27.6</version>
         <scope>import</scope>
         <type>pom</type>
       </dependency>
@@ -87,11 +87,16 @@
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-compiler-plugin</artifactId>
-          <version>3.13.0</version>
+          <version>3.14.1</version>
           <configuration>
             <debug>false</debug>
             <enablePreview>true</enablePreview>
           </configuration>
+        </plugin>
+        <plugin>
+          <groupId>org.codehaus.mojo</groupId>
+          <artifactId>versions-maven-plugin</artifactId>
+          <version>2.20.1</version>
         </plugin>
       </plugins>
     </pluginManagement>
